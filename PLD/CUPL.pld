@@ -1,0 +1,45 @@
+Name     Address_Decoder ;
+PartNo   16V8 ;
+Date     01.10.2025 ;
+Revision 01 ;
+Designer Yaman Alsaady ;
+Company  - ;
+Assembly - ;
+Location - ;
+Device   g16v8a ;
+
+/* ---------------------------------- */
+/* Pin assignment                     */
+/* ---------------------------------- */
+
+/* === INPUTS === */
+PIN 9 = A11;
+PIN 8 = A12;
+PIN 7 = A13;
+PIN 6 = A14;
+PIN 5 = A15;
+PIN 2 = RESET_IN;
+PIN 3 = clk;
+
+/* === OUTPUTS === */
+PIN 12 = RESET;
+PIN 17 = CS_PIA;
+PIN 18 = CS_RAM;
+PIN 19 = CS_ROM;
+PIN 14 = CS_VIA;
+PIN 16 = CS_ACIA;
+PIN 15 = CS_LCD;
+PIN 13 = CS_ACI;
+
+
+/* === OUTPUT DEFINITIONS === */
+
+CS_ROM 	= !A15 # !A14 # !A13;					/* 0xE000 - 0xFFFF */
+CS_ACIA = !A15 # !A14 #  A13 # !A12 # !A11;		/* 0xD800 - 0xDFFF */
+CS_PIA 	= !A15 # !A14 #  A13 # !A12 #  A11;		/* 0xD000 - 0xD8FF */
+CS_LCD 	= !A15 # !A14 #  A13 #  A12 # !A11;		/* 0xC800 - 0xCFFF */
+CS_ACI 	= !A15 # !A14 #  A13 #  A12 #  A11;		/* 0xC000 - 0xC8FF */
+CS_VIA 	= !A15 #  A14 # !A13 # !A12 # !A11;		/* 0xB800 - 0xBFFF */
+CS_RAM 	= !clk;									/* 0x0000 - 0x7FFF 		A15 is connected to */
+
+RESET = !RESET_IN;
